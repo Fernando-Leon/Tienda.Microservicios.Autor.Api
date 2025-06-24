@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "pass_admin_123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "14330:1433"
+    restart: always
+
+  autor-api:
+    build: .
+    depends_on:
+      - sqlserver
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=Libreria;User Id=sa;Password=pass_admin_123;TrustServerCertificate=True;
+    ports:
+      - "8080:8080"

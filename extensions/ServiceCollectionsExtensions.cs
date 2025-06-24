@@ -8,21 +8,22 @@ namespace Tienda.Microservicios.Autor.Api.extensions
 {
     public static class ServiceCollectionsExtensions
     {
-        public static IServiceCollection AddCustomServices(this IServiceCollection services,
-            IConfiguration configuration)
+        public static IServiceCollection AddCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Controladores + Validaciones
             services.AddControllers()
                 .AddFluentValidation(cfg =>
-                cfg.RegisterValidatorsFromAssemblyContaining<Nuevo>());
+                    cfg.RegisterValidatorsFromAssemblyContaining<Nuevo>());
 
             services.AddDbContext<ContextoAutor>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            {
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            });
 
-            // Agregamos mediatR como servicio
             services.AddMediatR(typeof(Nuevo.Manejador).Assembly);
             services.AddAutoMapper(typeof(Consulta.Manejador));
 
-            return services; // Ensure the method returns the IServiceCollection instance
+            return services;
         }
     }
 }
