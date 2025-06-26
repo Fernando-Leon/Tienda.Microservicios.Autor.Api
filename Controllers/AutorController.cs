@@ -7,10 +7,10 @@ namespace Tienda.Microservicios.Autor.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class AutorContoller: ControllerBase
+    public class AutorController: ControllerBase
     {
         private readonly IMediator _mediator;
-        public AutorContoller(IMediator mediator)
+        public AutorController(IMediator mediator)
         {
             this._mediator = mediator;
         }
@@ -31,6 +31,23 @@ namespace Tienda.Microservicios.Autor.Api.Controllers
         public async Task<ActionResult<AutorDto>> GetAutorLibro(string id)
         {
             return await _mediator.Send(new ConsultarFiltro.AutorUnico { AutorGuid = id });
+        }
+
+        [HttpGet("nombre/{nombre}")]
+        public async Task<ActionResult<AutorDto>> GetAutorPorNombre(string nombre)
+        {
+            try
+            {
+                return await _mediator.Send(new ConsultarFiltro.AutorUnico { Nombre = nombre });
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "No se encontró el autor")
+                {
+                    return NotFound();
+                }
+                throw;
+            }
         }
 
     }

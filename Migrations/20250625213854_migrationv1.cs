@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Tienda.Microservicios.Autor.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class despliegue1 : Migration
+    public partial class migrationv1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

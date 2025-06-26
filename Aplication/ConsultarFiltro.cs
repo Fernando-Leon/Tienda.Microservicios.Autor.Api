@@ -27,8 +27,8 @@ namespace Tienda.Microservicios.Autor.Api.Aplication
             {
                 var autor = await _contexto.AutorLibros
                     .Where(p =>
-                    (string.IsNullOrEmpty(request.AutorGuid) || p.AutorLibroGuid == request.AutorGuid) &&
-                    (string.IsNullOrEmpty(request.AutorGuid) || p.Nombre == request.Nombre)
+                        (string.IsNullOrEmpty(request.AutorGuid) || p.AutorLibroGuid == request.AutorGuid) &&
+                        (string.IsNullOrEmpty(request.Nombre) || p.Nombre == request.Nombre)
                     ).FirstOrDefaultAsync(cancellationToken);
 
                 if (autor == null)
