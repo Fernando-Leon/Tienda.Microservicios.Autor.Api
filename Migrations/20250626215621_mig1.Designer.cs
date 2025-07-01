@@ -12,8 +12,8 @@ using Tienda.Microservicios.Autor.Api.Persistencia;
 namespace Tienda.Microservicios.Autor.Api.Migrations
 {
     [DbContext(typeof(ContextoAutor))]
-    [Migration("20250625213854_migrationv1")]
-    partial class migrationv1
+    [Migration("20250626215621_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
